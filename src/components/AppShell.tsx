@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import logo from "@/assets/yamamah-logo.png.asset.json";
+import hhc from "@/assets/hhc-logo.png.asset.json";
 
 export function AppShell({ children, wide = false }: { children: ReactNode; wide?: boolean }) {
   return (
@@ -8,7 +9,9 @@ export function AppShell({ children, wide = false }: { children: ReactNode; wide
       <header className="sticky top-0 z-20 border-b bg-card/90 backdrop-blur">
         <div className={`mx-auto flex items-center justify-between gap-3 px-4 py-3 ${wide ? "max-w-7xl" : "max-w-3xl"}`}>
           <Link to="/" className="flex items-center gap-2.5 min-w-0">
-            <img src={logo.url} alt="Yamamah" className="h-9 w-9 shrink-0" />
+            <img src={hhc.url} alt="Health Holding Company" className="h-9 w-auto shrink-0" />
+            <img src={logo.url} alt="Yamamah" className="h-6 w-auto shrink-0" />
+            <span className="h-7 w-px bg-border shrink-0" />
             <div className="leading-tight min-w-0">
               <div className="font-display font-bold text-navy truncate">Care Coordination</div>
               <div className="text-xs text-muted-foreground truncate">User Acceptance Testing · Staging</div>

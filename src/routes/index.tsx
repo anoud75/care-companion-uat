@@ -3,7 +3,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AppShell, PrimaryButton } from "@/components/AppShell";
-import { POSITIONS } from "@/lib/steps";
+import hhc from "@/assets/hhc-logo.png.asset.json";
+import yamamah from "@/assets/yamamah-logo.png.asset.json";
 import { useSession } from "@/lib/session";
 import { startSession } from "@/lib/uat.functions";
 
@@ -38,15 +39,15 @@ function Welcome() {
     }
   }, [ready, session, navigate]);
 
-  const valid = name.trim().length >= 2 && emailOk(email) && position;
+  const valid = name.trim().length >= 2 && emailOk(email) && position.trim().length > 0;
 
   async function onStart() {
     if (!valid) return;
     setBusy(true);
     try {
-      const row = await start({ data: { full_name: name.trim(), email: email.trim(), position } });
+      const row = await start({ data: { full_name: name.trim(), email: email.trim(), position: position.trim() } });
       set({
-        id: row.id, full_name: name.trim(), email: email.trim(), position,
+        id: row.id, full_name: name.trim(), email: email.trim(), position: position.trim(),
         started_at: row.started_at, current_step: 0, results: {},
       });
       navigate({ to: "/briefing" });
@@ -61,15 +62,33 @@ function Welcome() {
 
   return (
     <AppShell>
-      <section className="hero-band rounded-2xl p-6 sm:p-10">
-        <div className="eyebrow text-teal">Health Holding Company · Yamamah</div>
-        <h1 className="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight text-primary-foreground">
-          Care Coordination acceptance testing
-        </h1>
-        <p className="mt-4 max-w-xl text-[15px] opacity-85">
-          You are about to test release one — the Diabetes Pathway and Chronic Disease Screening. The session follows
-          the journey through the platform one step at a time. About 45 minutes.
-        </p>
+      <section className="welcome-band card-surface overflow-hidden">
+        <div className="flex items-center gap-4 border-b bg-background/60 px-6 py-4 sm:px-10">
+          <img src={hhc.url} alt="Health Holding Company" className="h-11 w-auto" />
+          <div className="leading-tight">
+            <div className="text-sm font-bold text-navy">Health Holding Company</div>
+            <div className="text-xs text-muted-foreground">Yamamah population health platform</div>
+          </div>
+          <img src={yamamah.url} alt="Yamamah" className="ms-auto h-8 w-auto" />
+        </div>
+        <div className="px-6 py-8 sm:px-10 sm:py-10">
+          <span className="inline-flex items-center gap-2 rounded-full bg-teal-soft px-3 py-1 text-xs font-bold text-navy">
+            <span className="h-1.5 w-1.5 rounded-full bg-teal" /> Release one · Staging
+          </span>
+          <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">Care Coordination acceptance testing</h1>
+          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+            You are about to test the Diabetes Pathway and Chronic Disease Screening. The session follows the journey
+            through the platform, one step at a time.
+          </p>
+          <div className="mt-6 grid grid-cols-3 gap-3 max-w-md">
+            {[["14", "Steps"], ["~45", "Minutes"], ["1", "Screen at a time"]].map(([v, l]) => (
+              <div key={l} className="rounded-xl border bg-background px-3 py-3">
+                <div className="text-xl font-extrabold text-navy">{v}</div>
+                <div className="text-xs text-muted-foreground">{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="card-surface mt-6 p-6 sm:p-8">
@@ -92,10 +111,9 @@ function Welcome() {
           </label>
           <label className="block">
             <span className="text-sm font-semibold text-navy">Position *</span>
-            <select className={field} value={position} onChange={(e) => setPosition(e.target.value)}>
-              <option value="">Choose your position</option>
-              {POSITIONS.map((p) => <option key={p}>{p}</option>)}
-            </select>
+            <input className={field} value={position} placeholder="e.g. Care coordinator" autoComplete="organization-title"
+              onChange={(e) => setPosition(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, position: true }))} />
+            {touched["position"] && !position.trim() && <span className="mt-1 block text-xs text-fail">Please enter your position.</span>}
           </label>
         </div>
 
