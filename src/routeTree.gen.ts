@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BriefingRouteImport } from './routes/briefing'
+import { Route as CoordinatorRouteImport } from './routes/coordinator'
+import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as SubmittedRouteImport } from './routes/submitted'
+import { Route as StepNRouteImport } from './routes/step.$n'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BriefingRoute = BriefingRouteImport.update({
+  id: '/briefing',
+  path: '/briefing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoordinatorRoute = CoordinatorRouteImport.update({
+  id: '/coordinator',
+  path: '/coordinator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedbackRoute = FeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubmittedRoute = SubmittedRouteImport.update({
+  id: '/submitted',
+  path: '/submitted',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StepNRoute = StepNRouteImport.update({
+  id: '/step/$n',
+  path: '/step/$n',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/briefing': typeof BriefingRoute
+  '/coordinator': typeof CoordinatorRoute
+  '/feedback': typeof FeedbackRoute
+  '/submitted': typeof SubmittedRoute
+  '/step/$n': typeof StepNRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/briefing': typeof BriefingRoute
+  '/coordinator': typeof CoordinatorRoute
+  '/feedback': typeof FeedbackRoute
+  '/submitted': typeof SubmittedRoute
+  '/step/$n': typeof StepNRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/briefing': typeof BriefingRoute
+  '/coordinator': typeof CoordinatorRoute
+  '/feedback': typeof FeedbackRoute
+  '/submitted': typeof SubmittedRoute
+  '/step/$n': typeof StepNRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/briefing' | '/coordinator' | '/feedback' | '/submitted' | '/step/$n'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/briefing' | '/coordinator' | '/feedback' | '/submitted' | '/step/$n'
+  id:
+    | '__root__'
+    | '/'
+    | '/briefing'
+    | '/coordinator'
+    | '/feedback'
+    | '/submitted'
+    | '/step/$n'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BriefingRoute: typeof BriefingRoute
+  CoordinatorRoute: typeof CoordinatorRoute
+  FeedbackRoute: typeof FeedbackRoute
+  SubmittedRoute: typeof SubmittedRoute
+  StepNRoute: typeof StepNRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/briefing': {
+      id: '/briefing'
+      path: '/briefing'
+      fullPath: '/briefing'
+      preLoaderRoute: typeof BriefingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coordinator': {
+      id: '/coordinator'
+      path: '/coordinator'
+      fullPath: '/coordinator'
+      preLoaderRoute: typeof CoordinatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feedback': {
+      id: '/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof FeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/submitted': {
+      id: '/submitted'
+      path: '/submitted'
+      fullPath: '/submitted'
+      preLoaderRoute: typeof SubmittedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/step/$n': {
+      id: '/step/$n'
+      path: '/step/$n'
+      fullPath: '/step/$n'
+      preLoaderRoute: typeof StepNRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BriefingRoute: BriefingRoute,
+  CoordinatorRoute: CoordinatorRoute,
+  FeedbackRoute: FeedbackRoute,
+  SubmittedRoute: SubmittedRoute,
+  StepNRoute: StepNRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

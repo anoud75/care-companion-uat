@@ -33,7 +33,8 @@ function Welcome() {
 
   useEffect(() => {
     if (ready && session && !session.submitted_at) {
-      navigate({ to: session.briefed ? "/step/$n" : "/briefing", params: { n: String(session.current_step + 1) } as never });
+      if (session.briefed) navigate({ to: "/step/$n", params: { n: String(session.current_step + 1) } });
+      else navigate({ to: "/briefing" });
     }
   }, [ready, session, navigate]);
 
