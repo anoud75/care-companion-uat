@@ -10,7 +10,7 @@ export function AppShell({ children, wide = false }: { children: ReactNode; wide
         <div className={`mx-auto flex items-center justify-between gap-3 px-4 py-3 ${wide ? "max-w-7xl" : "max-w-3xl"}`}>
           <Link to="/" className="flex items-center gap-2.5 min-w-0">
             <img src={hhc.url} alt="Health Holding Company" className="h-9 w-auto shrink-0" />
-            <img src={logo.url} alt="Yamamah" className="h-8 w-8 shrink-0" />
+            <img src={logo.url} alt="Yamamah" className="h-6 w-auto shrink-0" />
             <span className="h-7 w-px bg-border shrink-0" />
             <div className="leading-tight min-w-0">
               <div className="font-display font-bold text-navy truncate">Care Coordination</div>
