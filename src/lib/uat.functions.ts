@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { syncSubmissionToGoogleSheets } from "./google-sheets";
 
 const startSchema = z.object({
   full_name: z.string().trim().min(2).max(120),
@@ -32,9 +33,14 @@ export const saveSession = createServerFn({ method: "POST" })
   .inputValidator((d) => saveSchema.parse(d))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const submittedAt = new Date().toISOString();
     const patch: {
-      current_step: number; results: never; updated_at: string;
-      feedback?: never; status?: string; submitted_at?: string;
+      current_step: number;
+      results: never;
+      updated_at: string;
+      feedback?: never;
+      status?: string;
+      submitted_at?: string;
     } = {
       current_step: data.current_step,
       results: data.results as never,
@@ -43,10 +49,30 @@ export const saveSession = createServerFn({ method: "POST" })
     if (data.feedback) patch.feedback = data.feedback as never;
     if (data.submit) {
       patch.status = "submitted";
-      patch.submitted_at = new Date().toISOString();
+      patch.submitted_at = submittedAt;
     }
-    const { error } = await supabaseAdmin.from("uat_sessions").update(patch).eq("id", data.id);
+    const { data: session, error } = await supabaseAdmin
+      .from("uat_sessions")
+      .update(patch)
+      .eq("id", data.id)
+      .select("id, full_name, email, position, started_at, results, feedback")
+      .single();
     if (error) throw new Error(error.message);
+
+    if (data.submit) {
+      await syncSubmissionToGoogleSheets(
+        {
+          id: session.id,
+          full_name: session.full_name,
+          email: session.email,
+          position: session.position,
+          started_at: session.started_at,
+          results: session.results as Record<string, never>,
+          feedback: session.feedback as never,
+        },
+        submittedAt,
+      );
+    }
     return { ok: true };
   });
 

@@ -6,6 +6,29 @@ It is a guided user acceptance testing tool. Clinical staff at a Saudi healthcar
 
 This project was built with [Lovable](https://lovable.dev).
 
+## Google Sheets integration
+
+When a tester selects **Submit my results**, the app saves their final result in
+Supabase and then sends the tester summary and all 14 step results to the Google
+Apps Script web-app URL. The server-side call avoids browser CORS restrictions.
+
+The included receiver is [docs/google-apps-script.gs](docs/google-apps-script.gs).
+
+1. Open the target Google Sheet, then choose **Extensions → Apps Script**.
+2. Replace the editor contents with `docs/google-apps-script.gs` and save.
+3. Deploy it as a **Web app**, executing as the spreadsheet owner and granting
+   access to **Anyone**. The app server, not the tester's browser, calls this
+   endpoint; protect it with the token in the next step.
+4. If the deployment produces a new URL, set `GOOGLE_SHEETS_WEB_APP_URL` in the
+   server environment. The supplied deployment URL is used by default.
+5. For write protection, set `UAT_WEBHOOK_TOKEN` in Apps Script properties and
+   the same `GOOGLE_SHEETS_WRITE_TOKEN` value in the app server environment.
+
+The script creates two tabs on its first submission: **UAT submissions** (one
+row per tester) and **UAT step results** (one row per tester and UAT step). It
+updates existing rows by submission ID, so a user retry will not create a
+duplicate record.
+
 ## Build with Lovable
 
 Continue developing this project in the [Lovable editor](https://lovable.dev/projects/75a9a36e-5a37-4e7f-965f-710df2481394).
