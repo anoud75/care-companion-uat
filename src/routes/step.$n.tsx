@@ -139,7 +139,7 @@ function StepPage() {
             {RESULTS.map((r) => (
               <button key={r.key} type="button" onClick={() => patch({ result: r.key })}
                 className={`rounded-lg border-2 px-2 py-3 text-sm font-semibold transition ${rec.result === r.key ? r.on : "bg-card text-navy hover:bg-secondary"}`}>
-                <span className="mr-1">{r.icon}</span>{r.label}
+                <r.icon />{r.label}
               </button>
             ))}
           </div>

@@ -66,7 +66,11 @@ function FeedbackPage() {
           <div className="mt-3 flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((i) => (
               <button key={i} type="button" aria-label={`${i} stars`} onClick={() => setFb({ overall: i })}
-                className={`text-3xl leading-none transition ${i <= (fb.overall ?? 0) ? "text-amber" : "text-border hover:text-amber/60"}`}>★</button>
+                className={`transition ${i <= (fb.overall ?? 0) ? "text-amber" : "text-border hover:text-amber/60"}`}>
+                <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.5l2.9 5.9 6.6.9-4.8 4.6 1.2 6.5L12 17.3l-5.9 3.1 1.2-6.5L2.5 9.3l6.6-.9L12 2.5z" />
+                </svg>
+              </button>
             ))}
             <span className="ml-3 text-sm font-semibold text-navy">{STAR_LABELS[fb.overall ?? 0]}</span>
           </div>
