@@ -184,7 +184,7 @@ function MiniDots({ results }: { results: Record<string, StepRecord> }) {
     <div className="flex gap-1">
       {STEPS.map((s) => {
         const r = results?.[s.ref]?.result;
-        const c = r === "pass" ? "bg-pass" : r === "fail" ? "bg-pink" : r === "blocked" ? "bg-blocked" : "bg-border";
+        const c = r === "pass" ? "bg-pass" : r === "fail" ? "bg-fail" : r === "blocked" ? "bg-blocked" : "bg-border";
         return <span key={s.ref} title={s.ref} className={`h-2 flex-1 rounded-full ${c}`} />;
       })}
     </div>
