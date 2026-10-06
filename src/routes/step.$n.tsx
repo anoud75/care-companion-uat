@@ -20,10 +20,15 @@ export const Route = createFileRoute("/step/$n")({
   component: StepPage,
 });
 
-const RESULTS: { key: Result; label: string; icon: string; on: string }[] = [
-  { key: "pass", label: "Pass", icon: "✓", on: "bg-pass text-primary-foreground border-pass" },
-  { key: "fail", label: "Fail", icon: "✗", on: "bg-fail text-primary-foreground border-fail" },
-  { key: "blocked", label: "Blocked", icon: "⛔", on: "bg-blocked text-primary-foreground border-blocked" },
+const iconProps = { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 3, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, className: "mr-1.5 inline-block h-4 w-4 align-[-2px]" };
+const CheckIcon = () => <svg {...iconProps}><path d="M4 12.5l5 5L20 6.5" /></svg>;
+const CrossIcon = () => <svg {...iconProps}><path d="M6 6l12 12M18 6L6 18" /></svg>;
+const BanIcon = () => <svg {...iconProps} strokeWidth={2.5}><circle cx="12" cy="12" r="9" /><path d="M5.8 5.8l12.4 12.4" /></svg>;
+
+const RESULTS: { key: Result; label: string; icon: () => JSX.Element; on: string }[] = [
+  { key: "pass", label: "Pass", icon: CheckIcon, on: "bg-pass text-primary-foreground border-pass" },
+  { key: "fail", label: "Fail", icon: CrossIcon, on: "bg-fail text-primary-foreground border-fail" },
+  { key: "blocked", label: "Blocked", icon: BanIcon, on: "bg-blocked text-primary-foreground border-blocked" },
 ];
 
 function StepPage() {
