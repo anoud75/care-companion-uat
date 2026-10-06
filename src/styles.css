@@ -48,38 +48,38 @@
 
 :root {
   --radius: 0.75rem;
-  --navy: oklch(0.24 0.06 258);           /* #0C1F3D */
-  --teal: oklch(0.74 0.12 210);           /* logo cyan */
-  --teal-soft: oklch(0.96 0.03 210);
-  --teal-deep: oklch(0.52 0.09 215);      /* readable teal for text on white */
-  --amber: oklch(0.72 0.14 75);
-  --amber-soft: oklch(0.97 0.04 85);
-  --pass: oklch(0.55 0.11 168);           /* #0E8A6A */
-  --pass-soft: oklch(0.95 0.04 168);
-  --fail: oklch(0.53 0.18 28);            /* #C0392B */
-  --fail-soft: oklch(0.95 0.03 25);
-  --blocked: oklch(0.63 0.13 85);         /* #B8860B */
-  --blocked-soft: oklch(0.96 0.05 90);
+  --navy: #0C1F3D;                        /* Yamamah navy */
+  --teal: #16BDD3;                        /* Yamamah brand cyan */
+  --teal-soft: #E8F7F9;                   /* pale tint of #16BDD3 */
+  --teal-deep: #1F97CC;                   /* Yamamah mid blue, readable on white */
+  --amber: #FFC043;                       /* Yamamah status amber */
+  --amber-soft: #FFE6BB;
+  --pass: #37CCA9;                        /* Yamamah status green */
+  --pass-soft: #B5EAD9;
+  --fail: #D14B34;                        /* Yamamah status red */
+  --fail-soft: #F5C6BC;
+  --blocked: #FFC043;
+  --blocked-soft: #FFE6BB;
   --pink: oklch(0.68 0.19 0);
 
-  --background: oklch(0.975 0.006 240);
-  --foreground: oklch(0.3 0.04 255);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.3 0.04 255);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.3 0.04 255);
-  --primary: #0CC0DF;
+  --background: #F4F7F7;                  /* Yamamah light neutral */
+  --foreground: #243951;                  /* Yamamah slate */
+  --card: #FFFFFF;
+  --card-foreground: #243951;
+  --popover: #FFFFFF;
+  --popover-foreground: #243951;
+  --primary: #0CC0DF;                     /* button cyan (client-specified) */
   --primary-foreground: var(--navy);
-  --secondary: oklch(0.95 0.01 240);
+  --secondary: #E9F1F3;
   --secondary-foreground: var(--navy);
-  --muted: oklch(0.95 0.01 240);
-  --muted-foreground: oklch(0.5 0.03 255);  /* #5A687A */
+  --muted: #E9F1F3;
+  --muted-foreground: #243951;
   --accent: var(--teal-soft);
   --accent-foreground: var(--navy);
   --destructive: var(--fail);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.91 0.012 245);
-  --input: oklch(0.88 0.015 245);
+  --destructive-foreground: #FFFFFF;
+  --border: #C7DBE2;                      /* Yamamah light blue-grey */
+  --input: #C7DBE2;
   --ring: var(--teal);
 }
 
@@ -103,14 +103,14 @@
 
 @utility hero-band {
   background:
-    radial-gradient(120% 140% at 100% 0%, oklch(0.74 0.12 210 / 0.35), transparent 55%),
-    linear-gradient(160deg, var(--navy), oklch(0.3 0.07 245));
-  color: oklch(0.98 0.005 240);
+    radial-gradient(120% 140% at 100% 0%, rgb(22 189 211 / 0.35), transparent 55%),
+    linear-gradient(160deg, var(--navy), #243951);
+  color: #F4F7F7;
 }
 
 @utility card-surface {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  box-shadow: 0 1px 2px oklch(0.24 0.06 258 / 0.04), 0 8px 24px -12px oklch(0.24 0.06 258 / 0.12);
+  box-shadow: 0 1px 2px rgb(12 31 61 / 0.04), 0 8px 24px -12px rgb(12 31 61 / 0.12);
 }
