@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect } from "react";
+import { useEffect, type ReactElement } from "react";
 import { toast } from "sonner";
 import { AppShell, GhostButton, PrimaryButton } from "@/components/AppShell";
 import { ProgressDots } from "@/components/ProgressDots";
@@ -25,7 +25,7 @@ const CheckIcon = () => <svg {...iconProps}><path d="M4 12.5l5 5L20 6.5" /></svg
 const CrossIcon = () => <svg {...iconProps}><path d="M6 6l12 12M18 6L6 18" /></svg>;
 const BanIcon = () => <svg {...iconProps} strokeWidth={2.5}><circle cx="12" cy="12" r="9" /><path d="M5.8 5.8l12.4 12.4" /></svg>;
 
-const RESULTS: { key: Result; label: string; icon: () => JSX.Element; on: string }[] = [
+const RESULTS: { key: Result; label: string; icon: () => ReactElement; on: string }[] = [
   { key: "pass", label: "Pass", icon: CheckIcon, on: "bg-pass text-primary-foreground border-pass" },
   { key: "fail", label: "Fail", icon: CrossIcon, on: "bg-fail text-primary-foreground border-fail" },
   { key: "blocked", label: "Blocked", icon: BanIcon, on: "bg-blocked text-primary-foreground border-blocked" },
