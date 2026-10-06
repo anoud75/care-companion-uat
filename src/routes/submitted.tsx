@@ -34,7 +34,9 @@ function Submitted() {
 
   return (
     <AppShell>
-      <div className="grid h-14 w-14 place-items-center rounded-full bg-pass text-2xl text-primary-foreground">✓</div>
+      <div className="grid h-14 w-14 place-items-center rounded-full bg-pass text-primary-foreground">
+        <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" /></svg>
+      </div>
       <div className="eyebrow mt-5 text-pass">Submitted</div>
       <h1 className="mt-2 text-3xl font-extrabold">Thank you, {first}</h1>
       <p className="mt-2 text-muted-foreground">Your results have been recorded and sent to the test coordinator. Nothing else is needed from you today.</p>
