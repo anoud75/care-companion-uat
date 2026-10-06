@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import heroAsset from "@/assets/uat-hero.png.asset.json";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -60,9 +61,11 @@ function Welcome() {
 
   return (
     <AppShell>
-      <section className="welcome-band card-surface overflow-hidden">
-        <div className="px-6 py-8 sm:px-10 sm:py-10">
-          <span className="inline-flex items-center gap-2 rounded-full bg-teal-soft px-3 py-1 text-xs font-bold text-navy">
+      <section className="relative overflow-hidden">
+        <img src={heroAsset.url} alt="" className="absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-right" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/20 sm:via-background/75 sm:to-transparent" />
+        <div className="relative px-6 py-12 sm:px-10 sm:py-14 max-w-2xl">
+          <span className="inline-flex items-center gap-2 rounded-full bg-teal-soft/90 px-3 py-1 text-xs font-bold text-navy backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-teal" /> Release one · Staging
           </span>
           <h1 className="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">Care Coordination acceptance testing</h1>
@@ -72,7 +75,7 @@ function Welcome() {
           </p>
           <div className="mt-6 grid grid-cols-3 gap-3 max-w-md">
             {[["14", "Steps"], ["~45", "Minutes"], ["1", "Screen at a time"]].map(([v, l]) => (
-              <div key={l} className="rounded-xl border bg-background px-3 py-3">
+              <div key={l} className="rounded-xl border bg-card/80 px-3 py-3 backdrop-blur">
                 <div className="text-xl font-extrabold text-navy">{v}</div>
                 <div className="text-xs text-muted-foreground">{l}</div>
               </div>
