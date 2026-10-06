@@ -78,7 +78,7 @@ function FeedbackPage() {
             <div className="mt-3 grid grid-cols-5 gap-2">
               {[1, 2, 3, 4, 5].map((v) => (
                 <button key={v} type="button" onClick={() => setFb({ [s.key]: v } as Partial<Feedback>)}
-                  className={`rounded-lg border-2 py-2.5 text-sm font-bold transition ${fb[s.key] === v ? "border-navy bg-navy text-primary-foreground" : "bg-card text-navy hover:bg-secondary"}`}>{v}</button>
+                  className={`rounded-lg border-2 py-2.5 text-sm font-bold transition ${fb[s.key] === v ? "border-primary bg-primary text-primary-foreground" : "bg-card text-navy hover:bg-secondary"}`}>{v}</button>
               ))}
             </div>
             <div className="mt-1.5 flex justify-between text-xs text-muted-foreground"><span>1 · {s.lo}</span><span>5 · {s.hi}</span></div>
