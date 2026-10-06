@@ -1,24 +1,110 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { AppShell, PrimaryButton } from "@/components/AppShell";
+import { POSITIONS } from "@/lib/steps";
+import { useSession } from "@/lib/session";
+import { startSession } from "@/lib/uat.functions";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Sign in — Care Coordination UAT Companion" },
+      { name: "description", content: "Start your guided acceptance test of Yamamah Care Coordination release one." },
+      { property: "og:title", content: "Care Coordination — UAT Companion" },
+      { property: "og:description", content: "Scan, sign in, and test release one step by step." },
+    ],
+  }),
+  component: Welcome,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const emailOk = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim());
+
+function Welcome() {
+  const { session, ready, set } = useSession();
+  const navigate = useNavigate();
+  const start = useServerFn(startSession);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [position, setPosition] = useState("");
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (ready && session && !session.submitted_at) {
+      navigate({ to: session.briefed ? "/step/$n" : "/briefing", params: { n: String(session.current_step + 1) } as never });
+    }
+  }, [ready, session, navigate]);
+
+  const valid = name.trim().length >= 2 && emailOk(email) && position;
+
+  async function onStart() {
+    if (!valid) return;
+    setBusy(true);
+    try {
+      const row = await start({ data: { full_name: name.trim(), email: email.trim(), position } });
+      set({
+        id: row.id, full_name: name.trim(), email: email.trim(), position,
+        started_at: row.started_at, current_step: 0, results: {},
+      });
+      navigate({ to: "/briefing" });
+    } catch {
+      toast.error("Could not start your session. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const field = "mt-1.5 w-full rounded-lg border border-input bg-card px-3.5 py-3 text-[15px] outline-none focus:border-teal focus:ring-2 focus:ring-teal/30";
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <AppShell>
+      <section className="hero-band rounded-2xl p-6 sm:p-10">
+        <div className="eyebrow text-teal">Health Holding Company · Yamamah</div>
+        <h1 className="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight text-primary-foreground">
+          Care Coordination acceptance testing
+        </h1>
+        <p className="mt-4 max-w-xl text-[15px] opacity-85">
+          You are about to test release one — the Diabetes Pathway and Chronic Disease Screening. The session follows
+          the journey through the platform one step at a time. About 45 minutes.
+        </p>
+      </section>
+
+      <section className="card-surface mt-6 p-6 sm:p-8">
+        <div className="eyebrow text-teal">Tester details</div>
+        <h2 className="mt-2 text-xl font-bold">Tell us who you are</h2>
+        <p className="mt-1 text-sm text-muted-foreground">So your results can be traced back and your notes credited to you.</p>
+
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          <label className="block sm:col-span-2">
+            <span className="text-sm font-semibold text-navy">Full name *</span>
+            <input className={field} value={name} placeholder="Maha Al-Otaibi" autoComplete="name"
+              onChange={(e) => setName(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, name: true }))} />
+            {touched.name && name.trim().length < 2 && <span className="mt-1 block text-xs text-fail">Please enter your full name.</span>}
+          </label>
+          <label className="block">
+            <span className="text-sm font-semibold text-navy">Email *</span>
+            <input className={field} type="email" value={email} placeholder="name@hhc.sa" autoComplete="email"
+              onChange={(e) => setEmail(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, email: true }))} />
+            {touched.email && !emailOk(email) && <span className="mt-1 block text-xs text-fail">Please enter a valid email.</span>}
+          </label>
+          <label className="block">
+            <span className="text-sm font-semibold text-navy">Position *</span>
+            <select className={field} value={position} onChange={(e) => setPosition(e.target.value)}>
+              <option value="">Choose your position</option>
+              {POSITIONS.map((p) => <option key={p}>{p}</option>)}
+            </select>
+          </label>
+        </div>
+
+        <PrimaryButton className="mt-7 w-full" disabled={!valid || busy} onClick={onStart}>
+          {busy ? "Starting…" : "Start testing"}
+        </PrimaryButton>
+        <p className="mt-3 text-center text-xs text-muted-foreground">
+          Your email is only used to attribute your results and credit your notes.
+        </p>
+      </section>
+    </AppShell>
   );
 }
