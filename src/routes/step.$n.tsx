@@ -87,7 +87,7 @@ function StepPage() {
       <article className="card-surface mt-4 overflow-hidden">
         <div className="p-5 sm:p-7">
           <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="rounded-md bg-navy px-2 py-1 font-bold text-primary-foreground">{step.ref}</span>
+            <span className="rounded-md bg-navy px-2 py-1 font-bold text-white">{step.ref}</span>
             <span className={`rounded-full px-2.5 py-1 font-semibold ${step.priority === "Highest" ? "bg-fail-soft text-fail" : "bg-secondary text-navy"}`}>
               {step.priority} priority
             </span>
