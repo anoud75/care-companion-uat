@@ -18,7 +18,7 @@ export const Route = createFileRoute("/briefing")({
 const RULES = [
   ["You are checking against the requirements", "Confirm the system does what the Business Requirements Document says. Not decide what it should do."],
   ["If something is not in the requirements, raise it", "Do not change it and do not mark the step failed. Switch on “Something outside the requirements”. It becomes a change request, not a defect."],
-  ["This is a test environment", "Patient names and file numbers are hidden behind codes. No sign-in here and no patient app — the patient side is confirmed with the Digital Twin team."],
+  ["This is a test environment", "Patients appear as hashed references instead of real names and file numbers. No sign-in here and no patient app — the patient side is confirmed with the Digital Twin team."],
   ["The task is chosen first", "You pick the care gap and its task is already decided. The list then opens showing only patients who do not already hold that task."],
 ];
 
