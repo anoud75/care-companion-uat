@@ -58,7 +58,7 @@ function Coordinator() {
       STEPS.map((s, i) => {
         const rec = r.results?.[s.ref] ?? {};
         return {
-          Tester: r.full_name, Email: r.email, Step: i + 1, Ref: s.ref, Priority: s.priority, Test: s.title,
+          Tester: r.full_name, Email: r.email, Step: i + 1, Ref: s.ref, Requirement: s.reqName, Priority: s.priority, Test: s.title,
           Result: rec.result ? RES_LABEL[rec.result] : "Not tested", Notes: rec.notes ?? "",
           "Criteria ticked": `${(rec.expect ?? []).filter(Boolean).length}/${s.expect.length}`,
         };
