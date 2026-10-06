@@ -53,6 +53,16 @@ function Briefing() {
         <input type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--primary)]" checked={ack} onChange={(e) => setAck(e.target.checked)} />
         <span className="text-sm text-navy">I have read these four points and I understand how to record what I see.</span>
       </label>
+
+      <div className="mt-6 flex gap-3">
+        <GhostButton onClick={() => navigate({ to: "/" })}>Back</GhostButton>
+        <PrimaryButton className="flex-1" disabled={!ack} onClick={() => {
+          update((s) => ({ ...s, briefed: true }));
+          navigate({ to: "/step/$n", params: { n: String((session?.current_step ?? 0) + 1) } });
+        }}>
+          Begin — step {(session?.current_step ?? 0) + 1}
+        </PrimaryButton>
+      </div>
     </AppShell>
   );
 }
