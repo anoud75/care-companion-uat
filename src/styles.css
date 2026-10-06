@@ -34,6 +34,7 @@
   --color-navy: var(--navy);
   --color-teal: var(--teal);
   --color-teal-soft: var(--teal-soft);
+  --color-teal-deep: var(--teal-deep);
   --color-amber: var(--amber);
   --color-amber-soft: var(--amber-soft);
   --color-pass: var(--pass);
@@ -50,6 +51,7 @@
   --navy: oklch(0.24 0.06 258);           /* #0C1F3D */
   --teal: oklch(0.74 0.12 210);           /* logo cyan */
   --teal-soft: oklch(0.96 0.03 210);
+  --teal-deep: oklch(0.52 0.09 215);      /* readable teal for text on white */
   --amber: oklch(0.72 0.14 75);
   --amber-soft: oklch(0.97 0.04 85);
   --pass: oklch(0.55 0.11 168);           /* #0E8A6A */
