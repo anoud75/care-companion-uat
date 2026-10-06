@@ -43,7 +43,6 @@
   --color-fail-soft: var(--fail-soft);
   --color-blocked: var(--blocked);
   --color-blocked-soft: var(--blocked-soft);
-  --color-pink: var(--pink);
 }
 
 :root {
@@ -60,7 +59,6 @@
   --fail-soft: #F5C6BC;
   --blocked: #FFC043;
   --blocked-soft: #FFE6BB;
-  --pink: oklch(0.68 0.19 0);
 
   --background: #F4F7F7;                  /* Yamamah light neutral */
   --foreground: #243951;                  /* Yamamah slate */
