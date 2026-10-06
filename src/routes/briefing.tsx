@@ -7,18 +7,19 @@ export const Route = createFileRoute("/briefing")({
   head: () => ({
     meta: [
       { title: "Before you begin — Care Coordination UAT" },
-      { name: "description", content: "Four rules that change how you record what you see during testing." },
+      { name: "description", content: "Five rules that change how you record what you see during testing." },
       { property: "og:title", content: "Before you begin — Care Coordination UAT" },
-      { property: "og:description", content: "Four rules for recording results in Care Coordination testing." },
+      { property: "og:description", content: "Five rules for recording results in Care Coordination testing." },
     ],
   }),
   component: Briefing,
 });
 
 const RULES = [
-  ["You are checking against the requirements", "Confirm the system does what the Business Requirements Document says. Not decide what it should do."],
+  ["You are checking against the requirements", "Confirm the system does what the Business Requirements Document says. Not decide what it should do. Each step is named after the requirement it checks."],
   ["If something is not in the requirements, raise it", "Do not change it and do not mark the step failed. Switch on “Something outside the requirements”. It becomes a change request, not a defect."],
-  ["This is a test environment", "Patients appear as hashed references instead of real names and file numbers. No sign-in here and no patient app — the patient side is confirmed with the Digital Twin team."],
+  ["This is a test environment", "Patients appear as hashed references instead of real names. When the system goes live, these same screens will show the real patient name and MRN."],
+  ["Tasks are not really sent in staging", "Staging is not connected to the Sehhaty app. You can open lists and confirm a send, but nothing reaches a patient and no task status comes back. The steps that need the real connection carry a “checked on production” note."],
   ["The task is chosen first", "You pick the care gap and its task is already decided. The list then opens showing only patients who do not already hold that task."],
 ];
 
@@ -34,7 +35,7 @@ function Briefing() {
   return (
     <AppShell>
       <div className="eyebrow text-teal-deep">Before you begin</div>
-      <h1 className="mt-2 text-3xl font-extrabold">Four things to know</h1>
+      <h1 className="mt-2 text-3xl font-extrabold">Five things to know</h1>
       <p className="mt-2 text-muted-foreground">Please read these. They change how you record what you see.</p>
 
       <ol className="mt-6 space-y-4">
@@ -51,7 +52,7 @@ function Briefing() {
 
       <label className="mt-6 flex cursor-pointer items-start gap-3 rounded-xl border border-teal/30 bg-teal-soft/60 p-4">
         <input type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--primary)]" checked={ack} onChange={(e) => setAck(e.target.checked)} />
-        <span className="text-sm text-navy">I have read these four points and I understand how to record what I see.</span>
+        <span className="text-sm text-navy">I have read these points and I understand how to record what I see.</span>
       </label>
 
       <div className="mt-6 flex gap-3">

@@ -93,7 +93,8 @@ function StepPage() {
             </span>
             <span className="rounded-full bg-secondary px-2.5 py-1 text-muted-foreground">{step.area}</span>
           </div>
-          <h1 className="mt-3 text-xl sm:text-2xl font-bold leading-snug">{step.title}</h1>
+          <div className="mt-2 text-xs font-semibold text-teal-deep">Requirement {step.ref} — {step.reqName}</div>
+          <h1 className="mt-1.5 text-xl sm:text-2xl font-bold leading-snug">{step.title}</h1>
 
           <div className="mt-5 rounded-xl border-l-4 border-amber bg-amber-soft p-4">
             <div className="eyebrow text-amber">Before you start</div>
