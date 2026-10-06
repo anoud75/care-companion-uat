@@ -82,13 +82,13 @@ function Welcome() {
             <span className="text-sm font-semibold text-navy">Full name *</span>
             <input className={field} value={name} placeholder="Maha Al-Otaibi" autoComplete="name"
               onChange={(e) => setName(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, name: true }))} />
-            {touched.name && name.trim().length < 2 && <span className="mt-1 block text-xs text-fail">Please enter your full name.</span>}
+            {touched["name"] && name.trim().length < 2 && <span className="mt-1 block text-xs text-fail">Please enter your full name.</span>}
           </label>
           <label className="block">
             <span className="text-sm font-semibold text-navy">Email *</span>
             <input className={field} type="email" value={email} placeholder="name@hhc.sa" autoComplete="email"
               onChange={(e) => setEmail(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, email: true }))} />
-            {touched.email && !emailOk(email) && <span className="mt-1 block text-xs text-fail">Please enter a valid email.</span>}
+            {touched["email"] && !emailOk(email) && <span className="mt-1 block text-xs text-fail">Please enter a valid email.</span>}
           </label>
           <label className="block">
             <span className="text-sm font-semibold text-navy">Position *</span>

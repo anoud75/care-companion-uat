@@ -66,7 +66,7 @@ function Coordinator() {
     );
     const raised = rows.flatMap((r) =>
       STEPS.filter((s) => r.results?.[s.ref]?.raise).map((s) => ({
-        Tester: r.full_name, Email: r.email, Ref: s.ref, Test: s.title, "Raised item": r.results[s.ref].raiseText ?? "",
+        Tester: r.full_name, Email: r.email, Ref: s.ref, Test: s.title, "Raised item": r.results[s.ref]?.raiseText ?? "",
       })),
     );
     const wb = XLSX.utils.book_new();

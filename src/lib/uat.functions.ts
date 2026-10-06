@@ -32,12 +32,15 @@ export const saveSession = createServerFn({ method: "POST" })
   .inputValidator((d) => saveSchema.parse(d))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const patch: Record<string, unknown> = {
+    const patch: {
+      current_step: number; results: never; updated_at: string;
+      feedback?: never; status?: string; submitted_at?: string;
+    } = {
       current_step: data.current_step,
-      results: data.results,
+      results: data.results as never,
       updated_at: new Date().toISOString(),
     };
-    if (data.feedback) patch.feedback = data.feedback;
+    if (data.feedback) patch.feedback = data.feedback as never;
     if (data.submit) {
       patch.status = "submitted";
       patch.submitted_at = new Date().toISOString();

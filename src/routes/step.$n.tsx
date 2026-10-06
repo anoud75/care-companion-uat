@@ -29,7 +29,7 @@ const RESULTS: { key: Result; label: string; icon: string; on: string }[] = [
 function StepPage() {
   const { n } = Route.useParams();
   const idx = Math.max(0, Math.min(STEPS.length - 1, Number(n) - 1 || 0));
-  const step = STEPS[idx];
+  const step = STEPS[idx]!;
   const { session, ready, update } = useSession();
   const navigate = useNavigate();
   const save = useServerFn(saveSession);
