@@ -17,13 +17,6 @@ export function AppShell({ children, wide = false }: { children: ReactNode; wide
               <div className="text-xs text-muted-foreground truncate">User Acceptance Testing · Staging</div>
             </div>
           </Link>
-          <Link
-            to="/coordinator"
-            className="shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold text-navy hover:bg-accent transition-colors"
-            activeProps={{ className: "bg-accent border-teal" }}
-          >
-            Coordinator view
-          </Link>
         </div>
       </header>
       <main className={`mx-auto w-full flex-1 px-4 py-6 sm:py-10 ${wide ? "max-w-7xl" : "max-w-3xl"}`}>{children}</main>
