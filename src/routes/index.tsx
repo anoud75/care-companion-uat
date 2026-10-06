@@ -3,8 +3,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AppShell, PrimaryButton } from "@/components/AppShell";
-import hhc from "@/assets/hhc-logo.png.asset.json";
-import yamamah from "@/assets/yamamah-logo.png.asset.json";
 import { useSession } from "@/lib/session";
 import { startSession } from "@/lib/uat.functions";
 
