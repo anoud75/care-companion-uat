@@ -103,14 +103,14 @@
 
 @utility hero-band {
   background:
-    radial-gradient(120% 140% at 100% 0%, oklch(0.74 0.12 210 / 0.35), transparent 55%),
-    linear-gradient(160deg, var(--navy), oklch(0.3 0.07 245));
-  color: oklch(0.98 0.005 240);
+    radial-gradient(120% 140% at 100% 0%, rgb(22 189 211 / 0.35), transparent 55%),
+    linear-gradient(160deg, var(--navy), #243951);
+  color: #F4F7F7;
 }
 
 @utility card-surface {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  box-shadow: 0 1px 2px oklch(0.24 0.06 258 / 0.04), 0 8px 24px -12px oklch(0.24 0.06 258 / 0.12);
+  box-shadow: 0 1px 2px rgb(12 31 61 / 0.04), 0 8px 24px -12px rgb(12 31 61 / 0.12);
 }
