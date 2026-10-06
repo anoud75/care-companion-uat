@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      uat_sessions: {
+        Row: {
+          current_step: number
+          email: string
+          feedback: Json | null
+          full_name: string
+          id: string
+          position: string
+          results: Json
+          started_at: string
+          status: string
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          current_step?: number
+          email: string
+          feedback?: Json | null
+          full_name: string
+          id?: string
+          position: string
+          results?: Json
+          started_at?: string
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          current_step?: number
+          email?: string
+          feedback?: Json | null
+          full_name?: string
+          id?: string
+          position?: string
+          results?: Json
+          started_at?: string
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
