@@ -135,6 +135,13 @@ function StepPage() {
             </div>
           )}
 
+          {step.prod && (
+            <div className="mt-4 rounded-xl border border-teal bg-teal-soft p-4 text-sm text-navy">
+              <div className="eyebrow text-teal-deep">Checked on production</div>
+              <p className="mt-1">{step.prod}</p>
+            </div>
+          )}
+
           <h2 className="mt-7 font-display text-base font-bold text-navy">Your result for this step</h2>
           <div className="mt-2 grid grid-cols-3 gap-2">
             {RESULTS.map((r) => (
@@ -147,7 +154,7 @@ function StepPage() {
           <p className="mt-2 text-xs text-muted-foreground">Blocked means you could not run it. Say what stopped you.</p>
 
           <label className="mt-5 block">
-            <span className="text-sm font-semibold text-navy">Notes — describe what happened on screen, and the hashed patient you tested with</span>
+            <span className="text-sm font-semibold text-navy">Notes — describe what happened on screen, and the hashed patient you tested with (on production this will be the patient's name and MRN)</span>
             <textarea rows={3} value={rec.notes ?? ""} onChange={(e) => patch({ notes: e.target.value })}
               placeholder={rec.result && rec.result !== "pass" ? "Please describe what happened" : "Optional, but please write something if this did not pass"}
               className={`mt-1.5 w-full rounded-lg border bg-card px-3.5 py-3 text-sm outline-none focus:border-teal focus:ring-2 focus:ring-teal/30 ${rec.result && rec.result !== "pass" && !rec.notes ? "border-fail" : "border-input"}`} />
