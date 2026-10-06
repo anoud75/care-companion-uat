@@ -3,8 +3,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AppShell, PrimaryButton } from "@/components/AppShell";
-import hhc from "@/assets/hhc-logo.png.asset.json";
-import yamamah from "@/assets/yamamah-logo.png.asset.json";
 import { useSession } from "@/lib/session";
 import { startSession } from "@/lib/uat.functions";
 
@@ -63,14 +61,6 @@ function Welcome() {
   return (
     <AppShell>
       <section className="welcome-band card-surface overflow-hidden">
-        <div className="flex items-center gap-4 border-b bg-background/60 px-6 py-4 sm:px-10">
-          <img src={hhc.url} alt="Health Holding Company" className="h-11 w-auto" />
-          <div className="leading-tight">
-            <div className="text-sm font-bold text-navy">Health Holding Company</div>
-            <div className="text-xs text-muted-foreground">Yamamah population health platform</div>
-          </div>
-          <img src={yamamah.url} alt="Yamamah" className="ms-auto h-8 w-auto" />
-        </div>
         <div className="px-6 py-8 sm:px-10 sm:py-10">
           <span className="inline-flex items-center gap-2 rounded-full bg-teal-soft px-3 py-1 text-xs font-bold text-navy">
             <span className="h-1.5 w-1.5 rounded-full bg-teal" /> Release one · Staging
